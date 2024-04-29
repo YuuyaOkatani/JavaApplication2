@@ -14,7 +14,28 @@ public class App
         
         String nome = " "; 
 
+        boolean ligar = true; 
+
         Conta conta = new Conta();  // erro aqu i
+
+        while (ligar == true){
+            System.out.print("Digite a resposta");
+            String response2 = scanner.nextLine(); 
+            switch (response2) {
+                case "true":
+                ligar = false; 
+
+                    
+                break;
+            
+                
+            }
+
+        }
+
+        /* 
+
+        
 
         System.out.print( "Ola! Gostaria de criar uma conta? ( y / n )"  );
         response = scanner.next().charAt(0); 
@@ -70,7 +91,7 @@ public class App
             }
            
         }
-        
+        */
     }
 
   
