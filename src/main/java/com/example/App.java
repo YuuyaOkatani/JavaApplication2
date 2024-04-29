@@ -9,7 +9,8 @@ public class App
 
         Scanner scanner = new Scanner(System.in); 
         char response =' ';
-        String[] Arraycontas = {}; 
+        Object[] arrayContas = {}; 
+        Object[] contaAdd = {};
         
         String nome = " "; 
 
@@ -35,10 +36,13 @@ public class App
             conta.setSaldo(saldo);
             conta.setLimite(limite);
 
-            System.out.println(conta.getNome());
-            System.out.println(conta.getNumero());
-            System.out.println(conta.getSaldo());
-            System.out.println(conta.getLimite());
+            contaAdd[0] = conta.getNome(); 
+            contaAdd[1] = conta.getNumero();
+            contaAdd[2] = conta.getSaldo();
+            contaAdd[3] = conta.getLimite();
+            arrayContas[0] = contaAdd;
+
+            
 
 
 
