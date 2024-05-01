@@ -1,6 +1,7 @@
 package com.example;
 
 import java.util.Scanner;
+import java.util.ArrayList; 
 
 public class App 
 {
@@ -11,12 +12,17 @@ public class App
         String response = " ";
         
         
-        ListasContas array = new ListasContas(0 , 0); 
+        
         
 
-        int position = 0; 
+        int position = -1; 
         String nome = " "; 
+
         boolean res = true;
+
+        ArrayList<Object> data = new ArrayList<Object>();
+        ArrayList<Object> data1 = new ArrayList<Object>();
+        ArrayList<Object> data2 = new ArrayList<Object>();
 
 
         boolean ligar = true; 
@@ -37,35 +43,37 @@ public class App
             switch (response) {
                 case "1":
                 System.out.print( "Digite seu nome: " );
-              
-
-                ListasContas newArray = new ListasContas(0, 1); 
-                array = newArray;
-                System.out.println(array);
-
-                
 
                 nome = scanner.nextLine();
                 
-                
-                
+                System.out.println(data);
 
-
-                
-                
-
-
-               
-
-                
+                position++; 
+          
 
                 conta.setNome(nome);
+                conta.setNumero(position);
+                conta.setSaldo(0);
+                conta.setLimite(0);
+
+                
+
+                data.add(conta.getNome() + " , " +   conta.getNumero()); 
+                System.out.println(data);
+              
+
                 
                 
+
+
                 
                 break;
 
                 case "2":
+
+
+
+                
                 break;
 
                 case "3":
@@ -155,20 +163,3 @@ class Conta{
 }
 
 
-class ListasContas{
-    private Object[][] ListaConta;
-
-    public ListasContas(int linhas, int colunas){
-        this.ListaConta = new Object[linhas][colunas]; 
-    }
-
-    public Object[][] getListaConta() {
-        return ListaConta;
-    }
-
-    public void setListaConta(Object[][] listaConta) {
-        ListaConta = listaConta;
-    } 
-
-    
-}
