@@ -15,7 +15,8 @@ public class App
         
         
 
-        int position = -1; 
+        int position = 0; 
+        
         String nome = " "; 
 
         boolean res = true;
@@ -30,7 +31,8 @@ public class App
         Conta conta = new Conta();  
 
         while (ligar == true){
-            
+
+            System.out.println("        ");
 
             System.out.println("1 - Criar conta");
             System.out.println("2 - Sacar");
@@ -58,7 +60,7 @@ public class App
 
                 
 
-                data.add(conta.getNome() + " , " +   conta.getNumero()); 
+                data.add(conta.getNome() + " , " +   conta.getNumero() +  " , " + conta.getSaldo() + " , " + conta.getLimite()); 
                 System.out.println(data);
               
 
@@ -70,10 +72,25 @@ public class App
                 break;
 
                 case "2":
-
-
-
+                System.out.print("Digite o número da conta ");
+                int position2 = Integer.parseInt(scanner.nextLine());
                 
+                
+
+                if (position2 <= data.size() && position2 > 0){
+                    System.out.println("A conta existe"); 
+                    
+                    System.out.println(data.get(position2 - 1 )); 
+                }
+                else{
+                    System.out.println("A conta não existe"); 
+                }
+
+               
+
+
+
+
                 break;
 
                 case "3":
