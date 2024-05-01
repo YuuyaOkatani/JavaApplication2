@@ -8,24 +8,74 @@ public class App
     {
 
         Scanner scanner = new Scanner(System.in); 
-        char response =' ';
-        Object[] arrayContas = {}; 
-        Object[] contaAdd = {};
+        String response = " ";
         
+        
+        ListasContas array = new ListasContas(0 , 0); 
+        
+
+        int position = 0; 
         String nome = " "; 
+        boolean res = true;
+
 
         boolean ligar = true; 
 
-        Conta conta = new Conta();  // erro aqu i
+        Conta conta = new Conta();  
 
         while (ligar == true){
-            System.out.print("Digite a resposta");
-            String response2 = scanner.nextLine(); 
-            switch (response2) {
-                case "true":
-                ligar = false; 
+            
 
-                    
+            System.out.println("1 - Criar conta");
+            System.out.println("2 - Sacar");
+            System.out.println("3 - Depositar");
+            System.out.println("4 - Transferir");
+            System.out.println("5 - Sair");
+
+            System.out.print("Ola! O que gostaria de fazer?: ");
+            response = scanner.nextLine(); 
+            switch (response) {
+                case "1":
+                System.out.print( "Digite seu nome: " );
+              
+
+                ListasContas newArray = new ListasContas(0, 1); 
+                array = newArray;
+                System.out.println(array);
+
+                
+
+                nome = scanner.nextLine();
+                
+                
+                
+
+
+                
+                
+
+
+               
+
+                
+
+                conta.setNome(nome);
+                
+                
+                
+                break;
+
+                case "2":
+                break;
+
+                case "3":
+                break;
+
+                case "4":
+                break;
+
+                case "5":
+                ligar = false;
                 break;
             
                 
@@ -33,65 +83,7 @@ public class App
 
         }
 
-        /* 
-
         
-
-        System.out.print( "Ola! Gostaria de criar uma conta? ( y / n )"  );
-        response = scanner.next().charAt(0); 
-        if(response == 'y'){
-             
-            System.out.print( "Digite seu nome: " );
-
-
-
-            nome = scanner.next(); 
-           
-            int numero = 0; 
-            double saldo = 0 ;
-            double limite = 0 ; 
-            
-            
-            conta.setNome(nome);
-            conta.setNumero(numero);
-            conta.setSaldo(saldo);
-            conta.setLimite(limite);
-
-            contaAdd[0] = conta.getNome(); 
-            contaAdd[1] = conta.getNumero();
-            contaAdd[2] = conta.getSaldo();
-            contaAdd[3] = conta.getLimite();
-            arrayContas[0] = contaAdd;
-
-            
-
-
-
-
-
-
-        }
-        else{
-      
-            System.out.print( "Gostaria de entrar na sua conta? ( y / n )"  );
-            response = scanner.next().charAt(0);
-            if( response == 'y'){
-                System.out.print("Digite o nome: ");
-                nome = scanner.nextLine(); 
-
-                System.out.print( "Digite o numero da sua conta: " );
-                int numero = scanner.nextInt(); 
-
-                
-                
-
-            }
-            else{
-
-            }
-           
-        }
-        */
     }
 
   
@@ -149,13 +141,34 @@ class Conta{
     }
 
     public void deposita(double valor){
+        saldo = saldo + valor;
 
     }
 
     public void transfere(String destino, double valor){
 
+
         
     }
     
 
+}
+
+
+class ListasContas{
+    private Object[][] ListaConta;
+
+    public ListasContas(int linhas, int colunas){
+        this.ListaConta = new Object[linhas][colunas]; 
+    }
+
+    public Object[][] getListaConta() {
+        return ListaConta;
+    }
+
+    public void setListaConta(Object[][] listaConta) {
+        ListaConta = listaConta;
+    } 
+
+    
 }
