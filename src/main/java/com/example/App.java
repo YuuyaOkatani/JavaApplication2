@@ -138,6 +138,10 @@ public class App
                     System.out.print("Digite o valor a ser sacado: ");
                     double valor = Double.parseDouble(scanner.nextLine());
 
+                    
+
+                    System.out.println(account.sacar(valor));
+
               
 
 
@@ -216,7 +220,125 @@ public class App
 
                 break;
 
+
                 case "4":
+
+                res = 0;
+               
+                System.out.print("Digite o número da sua conta: ");
+                code2 = Integer.parseInt(scanner.nextLine());
+           
+                for(int i = 0; i < data.size(); i++){
+                    Conta account = data.get(i);
+                    if(account.getNumero() == code2){
+                        res = i;
+                
+                
+
+                    }
+                    else{
+                        
+
+                    }
+                    
+
+
+                }
+         
+           
+                
+
+                if (res > 0 && res <= data.size()) {
+                   
+                    Conta account = data.get(res);
+
+
+
+           
+                    System.out.println(account.getNome()+ " , " + account.getNumero());
+
+                
+              
+
+                    
+                    System.out.println("Nome: " + account.getNome()); 
+                    System.out.println("Número: " + account.getNumero());
+                    System.out.println("Saldo atual: " + account.getSaldo());
+                    System.out.println("Limite atual: " + account.getLimite());
+
+                    System.out.print("Digite o número da conta que irá ser transferido: ");
+
+                    int code3 = scanner.nextInt();
+
+                    int res2 = 0;
+
+                    for(int i = 0; i < data.size(); i++){
+                        Conta account2 = data.get(i);
+                        if(account2.getNumero() == code3){
+                            res2 = i;
+                    
+                    
+    
+                        }
+                        else{
+
+                            
+                            
+    
+                        }
+
+
+                        
+    
+    
+                    }
+
+                    if(res2 != 0 ){
+                        System.out.print("Digite a quantidade que irá ser transferido: ");
+
+                        double valor = scanner.nextDouble();
+
+                        Conta account2 = data.get(res2);
+
+                        boolean response2 = account.transferir(account2, valor);
+                        if(response2 == false){
+                            System.out.println("Saldo insuficiente");
+                        }
+                        else{
+                            System.out.println("Transferido com sucesso!");
+
+                        }
+
+                        System.out.println("Nome: " + account.getNome()); 
+                        System.out.println("Número: " + account.getNumero());
+                        System.out.println("Saldo atual: " + account.getSaldo());
+                        System.out.println("Limite atual: " + account.getLimite());
+                        System.out.println();
+                        System.out.println("Nome: " + account2.getNome());
+                        System.out.println("Número: " + account2.getNumero());
+                        System.out.println("Saldo atual: " + account2.getSaldo());
+                        System.out.println("Limite atual: " + account2.getLimite());
+
+                        
+                        
+                        
+                    }
+                    else{
+                        System.out.println("A conta não existe"); 
+                    }
+                    
+
+              
+
+
+
+                    
+                }
+                else{
+                    System.out.println("A conta não existe"); 
+                }
+
+
                 break;
 
                 case "5":
@@ -287,15 +409,17 @@ class Conta{
 
     //----------------------------------------------------------------
 
-    public void sacar(double valor){
+    public boolean sacar(double valor){
 
-        if(limite >= 0.0 && limite < valor && limite < saldo){
+        if(limite >= 0.0 && limite < valor && limite < saldo && valor <= saldo){
            
             setSaldo(saldo - limite - valor);
+            return true; 
 
         }
         else
         {
+            return false;
       
 
         }
@@ -307,9 +431,17 @@ class Conta{
 
     }
 
-    public void transferir(Conta destino, double valor){
+    public boolean transferir(Conta destino, double valor){
+        if(saldo > 0 ){
+
         setSaldo(saldo - valor);
         destino.setSaldo(destino.getSaldo() + valor);
+        return true;
+
+        }
+        else{
+            return false;
+        }
 
 
         
