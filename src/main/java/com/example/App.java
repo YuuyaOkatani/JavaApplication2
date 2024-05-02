@@ -2,6 +2,7 @@ package com.example;
 
 import java.util.Scanner;
 import java.util.ArrayList; 
+import java.util.Random;
 
 public class App 
 {
@@ -15,20 +16,21 @@ public class App
         
         
 
-        int position = 0; 
-        
+         
         String nome = " "; 
+        Random random = new Random(); 
 
-        boolean res = true;
 
-        ArrayList<Object> data = new ArrayList<Object>();
-        ArrayList<Object> data1 = new ArrayList<Object>();
-        ArrayList<Object> data2 = new ArrayList<Object>();
+
+        ArrayList<Conta> data = new ArrayList<Conta>();
+        
+        
+        
 
 
         boolean ligar = true; 
 
-        Conta conta = new Conta();  
+          
 
         while (ligar == true){
 
@@ -48,20 +50,44 @@ public class App
 
                 nome = scanner.nextLine();
                 
-                System.out.println(data);
+         
 
-                position++; 
+         
+
+                Conta conta = new Conta();
+
+                int code = random.nextInt(10000000) + 1;
+
+                for(int i = 0; i < data.size() ; i++){
+                    if(data.get(i).getNumero() == code ){
+                        code = random.nextInt(10000000) + 1;
+                        i = 0;
+                        
+                    }
+                    
+                }
+
           
 
                 conta.setNome(nome);
-                conta.setNumero(position);
+                conta.setNumero(code);
                 conta.setSaldo(0);
                 conta.setLimite(0);
+                data.add(conta); 
+
+               
+                
 
                 
 
-                data.add(conta.getNome() + " , " +   conta.getNumero() +  " , " + conta.getSaldo() + " , " + conta.getLimite()); 
+            
+                
                 System.out.println(data);
+
+                System.out.println(conta.getNumero());
+                System.out.println(data.size());
+
+   
               
 
                 
@@ -72,15 +98,54 @@ public class App
                 break;
 
                 case "2":
-                System.out.print("Digite o número da conta ");
-                int position2 = Integer.parseInt(scanner.nextLine());
+                int res = 0;
+               
+                System.out.print("Digite o número da conta: ");
+                int code2 = Integer.parseInt(scanner.nextLine());
+           
+                for(int i = 0; i < data.size(); i++){
+                    Conta account = data.get(i);
+                    if(account.getNumero() == code2){
+                        res = i;
                 
                 
 
-                if (position2 <= data.size() && position2 > 0){
-                    System.out.println("A conta existe"); 
+                    }
+                    else{
+                        
+
+                    }
                     
-                    System.out.println(data.get(position2 - 1 )); 
+
+
+                }
+         
+           
+                
+
+                if (res > 0 && res <= data.size()) {
+                   
+                    Conta account = data.get(res);
+
+
+
+           
+                    System.out.println(account.getNome()+ " , " + account.getNumero());
+
+                
+              
+
+                    System.out.print("Digite o valor a ser sacado: ");
+                    double valor = Double.parseDouble(scanner.nextLine());
+
+              
+
+
+
+                    System.out.println("Nome: " + account.getNome()); 
+                    System.out.println("Número: " + account.getNumero());
+                    System.out.println("Saldo atual: " + account.getSaldo());
+                    System.out.println("Limite atual: " + account.getLimite());
                 }
                 else{
                     System.out.println("A conta não existe"); 
@@ -94,6 +159,61 @@ public class App
                 break;
 
                 case "3":
+
+                res = 0;
+               
+                System.out.print("Digite o número da conta: ");
+                code2 = Integer.parseInt(scanner.nextLine());
+           
+                for(int i = 0; i < data.size(); i++){
+                    Conta account = data.get(i);
+                    if(account.getNumero() == code2){
+                        res = i;
+                
+                
+
+                    }
+                    else{
+                        
+
+                    }
+                    
+
+
+                }
+         
+           
+                
+
+                if (res > 0 && res <= data.size()) {
+                   
+                    Conta account = data.get(res);
+
+
+
+           
+                    System.out.println(account.getNome()+ " , " + account.getNumero());
+
+                
+              
+
+                    System.out.print("Digite o valor a ser depositado: ");
+                    double valor = Double.parseDouble(scanner.nextLine());
+                    account.depositar(valor);
+
+              
+
+
+
+                    System.out.println("Nome: " + account.getNome()); 
+                    System.out.println("Número: " + account.getNumero());
+                    System.out.println("Saldo atual: " + account.getSaldo());
+                    System.out.println("Limite atual: " + account.getLimite());
+                }
+                else{
+                    System.out.println("A conta não existe"); 
+                }
+
                 break;
 
                 case "4":
@@ -125,6 +245,10 @@ class Conta{
     private int numero; 
     private double saldo; 
     private  double limite;
+
+
+
+
     
 
     //----------------------------------------------------------------
@@ -157,24 +281,40 @@ class Conta{
         this.nome = nome;
     }
 
+   
+
+    
+
     //----------------------------------------------------------------
 
-    public boolean saca(double valor){
+    public void sacar(double valor){
 
-        return valor == 0 ? true: false; 
+        if(limite >= 0.0 && limite < valor && limite < saldo){
+           
+            setSaldo(saldo - limite - valor);
+
+        }
+        else
+        {
+      
+
+        }
 
     }
 
-    public void deposita(double valor){
-        saldo = saldo + valor;
+    public void depositar(double valor){
+        setSaldo(saldo + valor);
 
     }
 
-    public void transfere(String destino, double valor){
+    public void transferir(Conta destino, double valor){
+        setSaldo(saldo - valor);
+        destino.setSaldo(destino.getSaldo() + valor);
 
 
         
     }
+    
     
 
 }
